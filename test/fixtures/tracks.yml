@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start: <%= RGeo::Cartesian.factory(:srid => 4326).parse_wkt("POINT(-73.988448 40.723309)") %>
+  end: <%= RGeo::Cartesian.factory(:srid => 4326).parse_wkt("POINT(-73.988448 41.173309)") %>
+
+two:
+  start: <%= RGeo::Cartesian.factory(:srid => 4326).parse_wkt("POINT(10.000000 51.000000)") %>
+  end: <%= RGeo::Cartesian.factory(:srid => 4326).parse_wkt("POINT(10.000000 51.450000)") %>
