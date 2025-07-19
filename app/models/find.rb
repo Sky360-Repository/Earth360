@@ -1,3 +1,3 @@
 class Find < ApplicationRecord
-  belongs_to :user_tracks
+  belongs_to :user_track
 end

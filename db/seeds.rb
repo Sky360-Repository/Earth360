@@ -1,4 +1,4 @@
-AdminUser.find_or_create_by!(email: 'admin@example.com') if Rails.env.development?
+AdminUser.find_or_create_by!(email: 'admin@example.com', password: 'password') if Rails.env.development?
 
 archive_path = Rails.root.join('db', 'fixtures', '240727_Trajectories_50km.tar.gz').to_s
 tracks_path = Rails.root.join('db', 'fixtures', '240727_Trajectories_50km.csv').to_s

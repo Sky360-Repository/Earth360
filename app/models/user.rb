@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   has_many :user_tracks, dependent: :destroy
-  has_many :tracks, through: :user_tracks
   has_many :finds, through: :user_tracks
 
   # Include default devise modules. Others available are:

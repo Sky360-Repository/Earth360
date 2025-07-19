@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+<table>
+    <thead>
+        <tr>
+            <th>Track Name</th>
+            <th>Created At</th>
+            <th>Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @user_tracks.each do |user_track| %>
+        <tr>
+            <td><%= user_track.track&.name || "Track ##{user_track.track_id}" %></td>
+            <td><%= user_track.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+            <td>
+                <% if user_track.completed_at && user_track.requested_at %>
+                <%= distance_of_time_in_words(user_track.requested_at, user_track.completed_at) %>
+                <% else %>
+                In Progress
+                <% end %>
+            </td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th>User Track</th>
+            <th>Found At</th>
+            <th>Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @finds.each do |find| %>
+            <tr>
+                <td>
+                    <% ut = @user_tracks.find { |ut| ut.id == find.user_tracks_id } %>
+                    <%= ut ? (ut.track&.name || "Track ##{ut.track_id}") : "UserTrack ##{find.user_tracks_id}" %>
+                </td>
+                <td><%= find.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+                <td>
+                    <% if find.location %>
+                    [<%= find.location.latitude %>, <%= find.location.longitude %>]
+                    <% else %>
+                    N/A
+                    <% end %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+</body>
+</html>

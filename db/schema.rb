@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_23_013123) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_23_042427) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -42,11 +42,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_23_013123) do
   end
 
   create_table "finds", force: :cascade do |t|
-    t.bigint "user_tracks_id", null: false
+    t.bigint "user_track_id", null: false
     t.geography "location", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_tracks_id"], name: "index_finds_on_user_tracks_id"
+    t.index ["user_track_id"], name: "index_finds_on_user_track_id"
   end
 
   create_table "tracks", force: :cascade do |t|
@@ -82,7 +82,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_23_013123) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "finds", "user_tracks", column: "user_tracks_id"
+  add_foreign_key "finds", "user_tracks"
   add_foreign_key "user_tracks", "tracks"
   add_foreign_key "user_tracks", "users"
 end
